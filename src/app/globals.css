@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
+/* =========================================================================
+   Letteros Design Tokens — CSS-переменные as-is из аудита сайта
+   ========================================================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Colors: text */
+  --l-text-main: #151515;
+  --l-text-white: #ffffff;
+  --l-text-placeholder: #A9A9A9;
+  --l-text-inactive: #BDBDBD;
+
+  /* Colors: background */
+  --l-bg-white: #ffffff;
+  --l-bg-alt: #F8F8F8;
+
+  /* Colors: accent */
+  --l-accent-blue: #001DFF;
+  --l-accent-blue-hover: #4B60FF;
+  --l-accent-blue-new: #3072ED;
+  --l-accent-blue-new-hover: #0A51D7;
+
+  /* Colors: border */
+  --l-border-default: #E1E1E1;
+  --l-border-blog-card: #A9A9A9;
+
+  /* Colors: surface */
+  --l-surface-dark: #151515;
+  --l-surface-active-bg: #F1F1F1;
+
+  /* Colors: misc */
+  --l-green: #2D8962;
+
+  /* Typography */
+  --l-font-family: Raleway, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+
+  /* Shadows */
+  --l-shadow-card-soft: rgba(63,63,63,0.02) 0px 2.12px 5.3px,
+                        rgba(63,63,63,0.03) 0px 10px 20.7px,
+                        rgba(63,63,63,0.05) 0px 26px 65px;
+
+  /* Container */
+  --l-container-max: 1280px;
+  --l-container-padding: 0 20px;
+
+  /* Motion */
+  --l-transition-btn: all 0.25s;
+  --l-transition-input: 0.25s;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-background: var(--l-bg-white);
+  --color-foreground: var(--l-text-main);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-l-text-main: var(--l-text-main);
+  --color-l-text-white: var(--l-text-white);
+  --color-l-text-placeholder: var(--l-text-placeholder);
+  --color-l-text-inactive: var(--l-text-inactive);
+
+  --color-l-bg-white: var(--l-bg-white);
+  --color-l-bg-alt: var(--l-bg-alt);
+
+  --color-l-accent-blue: var(--l-accent-blue);
+  --color-l-accent-blue-hover: var(--l-accent-blue-hover);
+  --color-l-accent-blue-new: var(--l-accent-blue-new);
+  --color-l-accent-blue-new-hover: var(--l-accent-blue-new-hover);
+
+  --color-l-border-default: var(--l-border-default);
+  --color-l-border-blog-card: var(--l-border-blog-card);
+
+  --color-l-surface-dark: var(--l-surface-dark);
+  --color-l-surface-active-bg: var(--l-surface-active-bg);
+
+  --color-l-green: var(--l-green);
+
+  --shadow-l-card-soft: var(--l-shadow-card-soft);
+
+  --font-sans: var(--l-font-family);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--l-bg-white);
+  color: var(--l-text-main);
+  font-family: var(--l-font-family);
 }
