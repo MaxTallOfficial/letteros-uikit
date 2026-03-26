@@ -1,6 +1,6 @@
 "use client";
 
-import { CSSProperties } from "react";
+import { CSSProperties, useState } from "react";
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { Typography } from "@/components/ui/Typography";
@@ -9,6 +9,20 @@ import { AccordionItem } from "@/components/ui/Accordion";
 import { Tag } from "@/components/ui/Tag";
 import { FormInput } from "@/components/ui/FormInput";
 import { Checkbox } from "@/components/ui/Checkbox";
+import { Select } from "@/components/ui/Select";
+import { Textarea } from "@/components/ui/Textarea";
+import { FileUpload } from "@/components/ui/FileUpload";
+import { Radio } from "@/components/ui/Radio";
+import { Header } from "@/components/ui/Header";
+import { Footer } from "@/components/ui/Footer";
+import { MobileMenu } from "@/components/ui/MobileMenu";
+import { CookieBanner } from "@/components/ui/CookieBanner";
+import { Toggle } from "@/components/ui/Toggle";
+import { PricingNav } from "@/components/ui/PricingNav";
+import { Modal } from "@/components/ui/Modal";
+import { Marquee } from "@/components/ui/Marquee";
+import { SocialIcon } from "@/components/ui/SocialIcon";
+import { TelegramIcon, VkIcon } from "@/components/ui/icons";
 import {
   colors,
   typography,
@@ -68,7 +82,7 @@ function SubTitle({ children }: { children: React.ReactNode }) {
 }
 
 function Swatch({ color, label, note }: { color: string; label: string; note?: string }) {
-  const isDark = color === "#151515" || color === "#A9A9A9" || color === "#BDBDBD" || color === "#2D8962" || color === "#001DFF" || color === "#4B60FF" || color === "#3072ED" || color === "#0A51D7";
+  const isLight = color === "#ffffff" || color === "#F8F8F8" || color === "#F1F1F1" || color === "#F2F2F2" || color === "#E1E1E1";
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "8px" }}>
       <div
@@ -77,7 +91,7 @@ function Swatch({ color, label, note }: { color: string; label: string; note?: s
           height: "48px",
           borderRadius: "8px",
           background: color,
-          border: color === "#ffffff" || color === "#F8F8F8" || color === "#F1F1F1" ? "1px solid #E1E1E1" : "none",
+          border: isLight ? "1px solid #E1E1E1" : "none",
           flexShrink: 0,
         }}
       />
@@ -132,26 +146,56 @@ function ShowcaseRow({ children, label, dark }: { children: React.ReactNode; lab
   );
 }
 
+function ShowcaseBox({ children, label }: { children: React.ReactNode; label?: string }) {
+  return (
+    <div style={{ marginBottom: "16px" }}>
+      {label && (
+        <div style={{ fontSize: "12px", fontWeight: 500, color: colors.text.placeholder, marginBottom: "8px", fontFamily: fontFamily.base }}>
+          {label}
+        </div>
+      )}
+      <div
+        style={{
+          padding: "20px",
+          borderRadius: "12px",
+          background: colors.bg.alt,
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
 // ---------------------------------------------------------------------------
 // Navigation
 // ---------------------------------------------------------------------------
 
 const NAV_ITEMS = [
-  { id: "overview", label: "Overview" },
-  { id: "colors", label: "Colors" },
-  { id: "typography", label: "Typography" },
-  { id: "spacing", label: "Spacing" },
-  { id: "radius", label: "Border Radius" },
-  { id: "shadows", label: "Shadows" },
-  { id: "motion", label: "Motion" },
-  { id: "breakpoints", label: "Breakpoints" },
+  { id: "overview", label: "Обзор" },
+  { id: "colors", label: "Палитра цветов" },
+  { id: "typography", label: "Типографика" },
+  { id: "spacing", label: "Отступы и сетка" },
+  { id: "radius", label: "Скругления" },
+  { id: "shadows", label: "Тени" },
+  { id: "motion", label: "Анимации" },
+  { id: "breakpoints", label: "Брейкпоинты" },
   { id: "zindex", label: "Z-Index" },
-  { id: "buttons", label: "Buttons" },
-  { id: "cards", label: "Cards" },
-  { id: "accordion", label: "Accordion" },
-  { id: "tags", label: "Tags" },
-  { id: "forms", label: "Forms" },
-  { id: "notes", label: "Notes" },
+  { id: "buttons", label: "Кнопки" },
+  { id: "cards", label: "Карточки" },
+  { id: "accordion", label: "Аккордеон" },
+  { id: "tags", label: "Теги и бейджи" },
+  { id: "forms", label: "Поля ввода" },
+  { id: "toggle", label: "Тогл" },
+  { id: "pricing-nav", label: "Навигация тарифов" },
+  { id: "header", label: "Хедер" },
+  { id: "footer", label: "Футер" },
+  { id: "mobile-menu", label: "Мобильное меню" },
+  { id: "cookie", label: "Cookie-Баннер" },
+  { id: "modal", label: "Модальное окно" },
+  { id: "marquee", label: "Бегущая строка" },
+  { id: "social", label: "Иконки соцсетей" },
+  { id: "notes", label: "Примечания" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -159,6 +203,10 @@ const NAV_ITEMS = [
 // ---------------------------------------------------------------------------
 
 export default function UIKitPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [cookieVisible, setCookieVisible] = useState(false);
+
   return (
     <div style={{ fontFamily: fontFamily.base, color: colors.text.main, background: colors.bg.white, display: "flex", minHeight: "100vh" }}>
       {/* Sidebar */}
@@ -208,7 +256,7 @@ export default function UIKitPage() {
         {/* ================================================================= */}
         {/* OVERVIEW */}
         {/* ================================================================= */}
-        <SectionTitle id="overview">Overview</SectionTitle>
+        <SectionTitle id="overview">Обзор</SectionTitle>
         <div style={{ maxWidth: "720px", fontSize: "18px", lineHeight: "27px", color: colors.text.main }}>
           <p style={{ margin: "0 0 16px" }}>
             UI kit для сайта <strong>letteros.com</strong>. Собран as-is на основе
@@ -227,7 +275,7 @@ export default function UIKitPage() {
         {/* ================================================================= */}
         {/* COLORS */}
         {/* ================================================================= */}
-        <SectionTitle id="colors">Colors</SectionTitle>
+        <SectionTitle id="colors">Палитра цветов</SectionTitle>
 
         <SubTitle>Текст</SubTitle>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "12px" }}>
@@ -240,28 +288,36 @@ export default function UIKitPage() {
         <SubTitle>Фон</SubTitle>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "12px" }}>
           <Swatch color={colors.bg.white} label="bg-white" />
-          <Swatch color={colors.bg.alt} label="bg-alt" note="footer, blog, серые секции" />
+          <Swatch color={colors.bg.alt} label="bg-alt" note="footer, blog, серые секции, dropdown" />
         </div>
 
-        <SubTitle>Акцент</SubTitle>
+        <SubTitle>Акцент — #001DFF (основная система)</SubTitle>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "12px" }}>
-          <Swatch color={colors.accent.blue} label="accent-blue" note="primary CTA, ссылки" />
-          <Swatch color={colors.accent.blueHover} label="accent-blue-hover" note="hover для btn--blue" />
-          <Swatch color={colors.accent.blueNew} label="accent-blue-new" note="ТОЛЬКО /pricing-new/" />
+          <Swatch color={colors.accent.blue} label="accent-blue" note="CTA-кнопки, ссылки, категории, radio, декор" />
+          <Swatch color={colors.accent.blueHover} label="accent-blue-hover" note="hover для btn--blue (светлее)" />
+        </div>
+        <p style={{ fontSize: "12px", color: colors.text.placeholder, margin: "8px 0 0" }}>
+          Используется повсеместно: кнопки .btn--blue, hover footer/dropdown/menu/card, .card__category, .radio:checked, gradient .text-gr, .hows__cart
+        </p>
+
+        <SubTitle>Акцент — #3072ED (ТОЛЬКО /pricing-new/)</SubTitle>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "12px" }}>
+          <Swatch color={colors.accent.blueNew} label="accent-blue-new" note="кнопки .btn--blue-new, pricing nav/table" />
           <Swatch color={colors.accent.blueNewHover} label="accent-blue-new-hover" note="hover для btn--blue-new (темнее)" />
         </div>
+        <p style={{ fontSize: "12px", color: colors.text.placeholder, margin: "8px 0 0" }}>
+          Параллельная система: классы с суффиксом -new. Hover темнеет (противоположно основному).
+        </p>
 
-        <SubTitle>Границы</SubTitle>
+        <SubTitle>Границы и поверхности</SubTitle>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "12px" }}>
-          <Swatch color={colors.border.default} label="border-default" note="карточки, инпуты, toggle" />
-          <Swatch color={colors.border.blogCard} label="border-blog-card" />
-        </div>
-
-        <SubTitle>Поверхности</SubTitle>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "12px" }}>
-          <Swatch color={colors.surface.dark} label="surface-dark" note="тёмные секции, btn--black" />
-          <Swatch color={colors.surface.activeBg} label="surface-active-bg" note="active period toggle" />
+          <Swatch color={colors.border.default} label="border-default" note="карточки, инпуты, toggle, accordion" />
+          <Swatch color={colors.border.blogCard} label="border-blog-card" note="blog card, file upload dashed" />
+          <Swatch color={colors.surface.dark} label="surface-dark" note="header, тёмные секции, btn--black" />
+          <Swatch color={colors.surface.activeBg} label="surface-active-bg" note="toggle active bg" />
+          <Swatch color={colors.cookie} label="cookie-bg" note="cookie banner" />
           <Swatch color={colors.green} label="green" note="теги на /templates/" />
+          <Swatch color={colors.cardCategoryDarker} label="card-category-darker" note=".card__category:hover" />
         </div>
 
         <SubTitle>Градиент</SubTitle>
@@ -281,7 +337,7 @@ export default function UIKitPage() {
         {/* ================================================================= */}
         {/* TYPOGRAPHY */}
         {/* ================================================================= */}
-        <SectionTitle id="typography">Typography</SectionTitle>
+        <SectionTitle id="typography">Типографика</SectionTitle>
         <p style={{ fontSize: "14px", color: colors.text.placeholder, margin: "0 0 24px" }}>
           Шрифт: {fontFamily.base}. Загружены веса: 500, 600, 700, 800. Фактически используются: 400, 500, 600, 700.
         </p>
@@ -304,9 +360,9 @@ export default function UIKitPage() {
         {/* ================================================================= */}
         {/* SPACING */}
         {/* ================================================================= */}
-        <SectionTitle id="spacing">Spacing & Container</SectionTitle>
+        <SectionTitle id="spacing">Отступы и сетка</SectionTitle>
 
-        <SubTitle>Container</SubTitle>
+        <SubTitle>Контейнер</SubTitle>
         <TokenTable
           data={[
             ["max-width (default)", containerByBreakpoint.default],
@@ -318,19 +374,15 @@ export default function UIKitPage() {
         />
 
         <SubTitle>Gap-паттерны</SubTitle>
-        <TokenTable
-          data={Object.entries(gaps)}
-        />
+        <TokenTable data={Object.entries(gaps)} />
 
-        <SubTitle>Section padding-bottom (главная)</SubTitle>
-        <TokenTable
-          data={Object.entries(sectionPaddingBottom)}
-        />
+        <SubTitle>Отступы секций снизу (главная)</SubTitle>
+        <TokenTable data={Object.entries(sectionPaddingBottom)} />
 
         {/* ================================================================= */}
         {/* BORDER RADIUS */}
         {/* ================================================================= */}
-        <SectionTitle id="radius">Border Radius</SectionTitle>
+        <SectionTitle id="radius">Скругления</SectionTitle>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", alignItems: "flex-end" }}>
           {Object.entries(radius).map(([name, value]) => (
             <div key={name} style={{ textAlign: "center" }}>
@@ -352,7 +404,7 @@ export default function UIKitPage() {
         {/* ================================================================= */}
         {/* SHADOWS */}
         {/* ================================================================= */}
-        <SectionTitle id="shadows">Shadows</SectionTitle>
+        <SectionTitle id="shadows">Тени</SectionTitle>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "24px" }}>
           {Object.entries(shadows).map(([name, value]) => (
             <div key={name} style={{ textAlign: "center" }}>
@@ -374,7 +426,7 @@ export default function UIKitPage() {
         {/* ================================================================= */}
         {/* MOTION */}
         {/* ================================================================= */}
-        <SectionTitle id="motion">Motion / Transitions</SectionTitle>
+        <SectionTitle id="motion">Анимации и переходы</SectionTitle>
         <TokenTable data={Object.entries(motion)} />
 
         <SubTitle>Opacity</SubTitle>
@@ -383,19 +435,19 @@ export default function UIKitPage() {
         {/* ================================================================= */}
         {/* BREAKPOINTS */}
         {/* ================================================================= */}
-        <SectionTitle id="breakpoints">Breakpoints</SectionTitle>
+        <SectionTitle id="breakpoints">Брейкпоинты</SectionTitle>
         <TokenTable data={Object.entries(breakpoints)} />
 
         {/* ================================================================= */}
         {/* Z-INDEX */}
         {/* ================================================================= */}
-        <SectionTitle id="zindex">Z-Index</SectionTitle>
+        <SectionTitle id="zindex">Z-Index слои</SectionTitle>
         <TokenTable data={Object.entries(zIndex).map(([k, v]) => [k, String(v)])} />
 
         {/* ================================================================= */}
         {/* BUTTONS */}
         {/* ================================================================= */}
-        <SectionTitle id="buttons">Buttons</SectionTitle>
+        <SectionTitle id="buttons">Кнопки</SectionTitle>
 
         <SubTitle>Размеры</SubTitle>
         {(Object.keys(buttonSizes) as (keyof typeof buttonSizes)[]).map((size) => (
@@ -407,13 +459,16 @@ export default function UIKitPage() {
         ))}
 
         <SubTitle>Все варианты (size=&quot;m&quot;)</SubTitle>
-        <ShowcaseRow label="Светлый фон">
+        <ShowcaseRow label="Светлый фон — основная система (#001DFF)">
           <Button variant="blue">btn--blue</Button>
-          <Button variant="blueNew">btn--blue-new</Button>
           <Button variant="black">btn--black</Button>
           <Button variant="transparentBlack">btn--tr-b</Button>
           <Button variant="transparentBlue">btn--tr-blue</Button>
           <Button variant="green">btn--green</Button>
+        </ShowcaseRow>
+        <ShowcaseRow label="Светлый фон — pricing-new система (#3072ED)">
+          <Button variant="blueNew">btn--blue-new</Button>
+          <Button variant="transparentBlueNew">btn--tr-blue-new</Button>
         </ShowcaseRow>
         <ShowcaseRow label="Тёмный фон" dark>
           <Button variant="white">btn--white</Button>
@@ -434,9 +489,9 @@ export default function UIKitPage() {
         {/* ================================================================= */}
         {/* CARDS */}
         {/* ================================================================= */}
-        <SectionTitle id="cards">Cards</SectionTitle>
+        <SectionTitle id="cards">Карточки</SectionTitle>
 
-        <SubTitle>differents — Feature Card</SubTitle>
+        <SubTitle>differents — Карточка фичи</SubTitle>
         <div style={{ maxWidth: "400px" }}>
           <Card type="differents">
             <div style={{ width: "48px", height: "48px", borderRadius: "12px", background: colors.bg.alt, marginBottom: "16px" }} />
@@ -447,7 +502,7 @@ export default function UIKitPage() {
           </Card>
         </div>
 
-        <SubTitle>hows — Gradient Card</SubTitle>
+        <SubTitle>hows — Градиентная карточка</SubTitle>
         <Card type="hows" style={{ display: "flex", padding: "40px", maxWidth: "700px" }}>
           <div style={{ flex: 1 }}>
             <Typography level="h4" color={colors.text.white}>Как это работает</Typography>
@@ -457,7 +512,7 @@ export default function UIKitPage() {
           </div>
         </Card>
 
-        <SubTitle>integrations — Logo Card</SubTitle>
+        <SubTitle>integrations — Карточка интеграции</SubTitle>
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
           <Card type="integrations" style={{ display: "flex", alignItems: "center", width: "295px" }}>
             <div style={{ width: "32px", height: "32px", borderRadius: "6px", background: colors.bg.alt }} />
@@ -465,7 +520,7 @@ export default function UIKitPage() {
           </Card>
         </div>
 
-        <SubTitle>pricing — Pricing Card</SubTitle>
+        <SubTitle>pricing — Карточка тарифа</SubTitle>
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
           <Card type="pricing" style={{ width: "244px" }}>
             <Typography level="h4" color={colors.text.main}>Старт</Typography>
@@ -482,7 +537,7 @@ export default function UIKitPage() {
           </Card>
         </div>
 
-        <SubTitle>blog — Blog Card</SubTitle>
+        <SubTitle>blog — Карточка блога</SubTitle>
         <Card type="blog" style={{ maxWidth: "360px" }}>
           <Tag variant="blue">Советы</Tag>
           <Typography level="h4" color={colors.text.main} style={{ marginTop: "12px" }}>
@@ -493,7 +548,7 @@ export default function UIKitPage() {
           </Typography>
         </Card>
 
-        <SubTitle>faq — FAQ Item (hover-тень)</SubTitle>
+        <SubTitle>faq — Элемент FAQ (hover-тень)</SubTitle>
         <div style={{ maxWidth: "700px" }}>
           <Card type="faq" style={{ padding: "32px 40px" }}>
             <Typography level="h4Accordion" color={colors.text.main}>
@@ -505,7 +560,7 @@ export default function UIKitPage() {
         {/* ================================================================= */}
         {/* ACCORDION */}
         {/* ================================================================= */}
-        <SectionTitle id="accordion">Accordion / FAQ</SectionTitle>
+        <SectionTitle id="accordion">Аккордеон / FAQ</SectionTitle>
 
         <SubTitle>Вариант faq — с карточкой и тенью</SubTitle>
         <div style={{ maxWidth: "700px" }}>
@@ -539,7 +594,7 @@ export default function UIKitPage() {
         {/* ================================================================= */}
         {/* TAGS */}
         {/* ================================================================= */}
-        <SectionTitle id="tags">Tags / Badges</SectionTitle>
+        <SectionTitle id="tags">Теги и бейджи</SectionTitle>
         <ShowcaseRow label="green — btn--tag btn--green (/templates/)">
           <Tag variant="green">Бесплатно</Tag>
           <Tag variant="green">Верстка мастер-шаблона</Tag>
@@ -552,25 +607,67 @@ export default function UIKitPage() {
         {/* ================================================================= */}
         {/* FORMS */}
         {/* ================================================================= */}
-        <SectionTitle id="forms">Form Elements</SectionTitle>
+        <SectionTitle id="forms">Поля ввода</SectionTitle>
 
-        <SubTitle>Text Input — .form-input</SubTitle>
+        <SubTitle>Текстовое поле — .form-input</SubTitle>
         <div style={{ maxWidth: "400px" }}>
           <FormInput placeholder="Email" />
           <p style={{ fontSize: "12px", color: colors.text.placeholder, marginTop: "8px" }}>
-            Focus: border-color → #151515. Placeholder скрывается при focus.
+            54px height, radius 15px. Focus: border-color → #151515. Placeholder скрывается при focus.
           </p>
         </div>
 
-        <SubTitle>Checkbox</SubTitle>
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "400px" }}>
-          <Checkbox label="Обычный checkbox — font-size 14px, color #A9A9A9" variant="default" />
-          <Checkbox label="Simple checkbox — font-size 14px, color #151515" variant="simple" />
-          <Checkbox label="Tiny — 10px, line-height 1.2" variant="tiny" />
+        <SubTitle>Select</SubTitle>
+        <div style={{ maxWidth: "400px" }}>
+          <Select
+            placeholder="Выберите тип"
+            options={[
+              { value: "html", label: "Вёрстка HTML" },
+              { value: "design", label: "Дизайн" },
+              { value: "template", label: "Мастер-шаблон" },
+            ]}
+          />
+          <p style={{ fontSize: "12px", color: colors.text.placeholder, marginTop: "8px" }}>
+            56px height, radius 15px. На сайте: Select2.
+          </p>
+        </div>
+
+        <SubTitle>Textarea</SubTitle>
+        <div style={{ maxWidth: "400px" }}>
+          <Textarea placeholder="Комментарий к заказу" />
+          <p style={{ fontSize: "12px", color: colors.text.placeholder, marginTop: "8px" }}>
+            Radius 15px, padding 17px 15px. Height варьируется (144px на /demo/).
+          </p>
+        </div>
+
+        <SubTitle>Загрузка файла</SubTitle>
+        <div style={{ maxWidth: "400px" }}>
+          <FileUpload label="Загрузить файл" />
+          <p style={{ fontSize: "12px", color: colors.text.placeholder, marginTop: "8px" }}>
+            Border 1px dashed #A9A9A9, radius 15px, height 106px. На /templates/ и /demo/.
+          </p>
+        </div>
+
+        <SubTitle>Radio</SubTitle>
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px", maxWidth: "400px" }}>
+          <Radio label="Вариант A" name="demo-radio" defaultChecked />
+          <Radio label="Вариант B" name="demo-radio" />
+          <Radio label="Вариант C" name="demo-radio" />
+          <p style={{ fontSize: "12px", color: colors.text.placeholder, marginTop: "4px" }}>
+            :checked — border-color #001DFF, точка внутри.
+          </p>
+        </div>
+
+        <SubTitle>Checkbox — все варианты</SubTitle>
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "500px" }}>
+          <Checkbox label="default — 14px, color #A9A9A9, padding-left 22px" variant="default" />
+          <Checkbox label="simple — 14px, color #151515, padding-left 32px" variant="simple" />
+          <Checkbox label="tiny — 10px, line-height 1.2" variant="tiny" />
+          <Checkbox label="large — 24px / 500, padding-left 49px (/templates/)" variant="large" />
           <Checkbox label="Checked по умолчанию" variant="default" defaultChecked />
         </div>
 
-        <SubTitle>Subscribe Form Pattern</SubTitle>
+        <SubTitle>Паттерн формы подписки</SubTitle>
         <div
           style={{
             maxWidth: "280px",
@@ -584,17 +681,209 @@ export default function UIKitPage() {
             <Button variant="black" size="m" full>Подписаться</Button>
           </div>
           <div style={{ marginTop: "12px" }}>
-            <Checkbox
-              label="Я согласен получать рассылку"
-              variant="tiny"
-            />
+            <Checkbox label="Я согласен получать рассылку" variant="tiny" />
           </div>
         </div>
 
         {/* ================================================================= */}
+        {/* TOGGLE */}
+        {/* ================================================================= */}
+        <SectionTitle id="toggle">Тогл</SectionTitle>
+        <p style={{ fontSize: "14px", color: colors.text.placeholder, margin: "0 0 20px" }}>
+          Переключатель опций. На сайте: месяц/год на /pricing-new/.
+          Container radius 32px, active bg #F1F1F1 + weight 700.
+        </p>
+        <ShowcaseBox label="2 опции (как на /pricing-new/)">
+          <Toggle options={["Месяц", "Год"]} />
+        </ShowcaseBox>
+        <ShowcaseBox label="3 опции">
+          <Toggle options={["Месяц", "Квартал", "Год"]} defaultIndex={1} />
+        </ShowcaseBox>
+
+        {/* ================================================================= */}
+        {/* PRICING NAV */}
+        {/* ================================================================= */}
+        <SectionTitle id="pricing-nav">Навигация тарифов</SectionTitle>
+        <p style={{ fontSize: "14px", color: colors.text.placeholder, margin: "0 0 20px" }}>
+          Навигация по тарифным планам внутри таблицы сравнения на /pricing-new/.
+          Active: color #3072ED, border-bottom выделение. Привязан к pricing table.
+        </p>
+        <ShowcaseBox>
+          <PricingNav plans={["Free", "Start", "Growth", "Pro", "Enterprise"]} defaultActive={2} />
+        </ShowcaseBox>
+
+        {/* ================================================================= */}
+        {/* HEADER */}
+        {/* ================================================================= */}
+        <SectionTitle id="header">Хедер</SectionTitle>
+        <p style={{ fontSize: "14px", color: colors.text.placeholder, margin: "0 0 20px" }}>
+          Fixed, bg #151515, height 50px, z-index 1040, padding 0 24px.
+          Реальный layout: logo + nav (7 пунктов + 2 dropdown) + lang switcher + Войти (dropdown) + CTA btn--white.
+          Dropdown: bg #F8F8F8, radius 15px, padding 15px 22px 12px, shadow cardSoft.
+          В демо position: relative.
+        </p>
+        <Header />
+
+        {/* ================================================================= */}
+        {/* FOOTER */}
+        {/* ================================================================= */}
+        <SectionTitle id="footer">Футер</SectionTitle>
+        <p style={{ fontSize: "14px", color: colors.text.placeholder, margin: "0 0 20px" }}>
+          Bg #F8F8F8, .footer__main padding 58px 0 47px, flex space-between wrap.
+          5 колонок: Продукт, Бесплатные сервисы, Компания, Документы, Контакты (social 32x32 bg #151515).
+          Subscribe block: 260px, input 54px + btn--black 54px + 2 checkbox tiny + recaptcha.
+          Bottom: border-top #E1E1E1, logo grey + copyright + «Сделано в Grids».
+        </p>
+      </Container>
+      <Footer />
+      <Container>
+
+        {/* ================================================================= */}
+        {/* MOBILE MENU */}
+        {/* ================================================================= */}
+        <SectionTitle id="mobile-menu">Мобильное меню</SectionTitle>
+        <p style={{ fontSize: "14px", color: colors.text.placeholder, margin: "0 0 20px" }}>
+          Fixed, z-index 100, inner 260px, overlay rgba(0,0,0,0.2).
+          Dividers border-bottom. Social links 42x42px.
+        </p>
+        <button
+          onClick={() => setMobileMenuOpen(true)}
+          style={{
+            padding: "10px 20px",
+            background: colors.surface.dark,
+            color: colors.text.white,
+            border: "none",
+            borderRadius: "10px",
+            cursor: "pointer",
+            fontFamily: fontFamily.base,
+            fontSize: "14px",
+            fontWeight: 700,
+          }}
+        >
+          Открыть Mobile Menu
+        </button>
+        <MobileMenu
+          open={mobileMenuOpen}
+          onClose={() => setMobileMenuOpen(false)}
+        />
+
+        {/* ================================================================= */}
+        {/* COOKIE BANNER */}
+        {/* ================================================================= */}
+        <SectionTitle id="cookie">Cookie-Баннер</SectionTitle>
+        <p style={{ fontSize: "14px", color: colors.text.placeholder, margin: "0 0 20px" }}>
+          Fixed, bottom 0, z-index 1000, bg #F2F2F2, dual box-shadow.
+          Кнопка: btn--s-s btn--blue, font-size 12px.
+        </p>
+        <button
+          onClick={() => setCookieVisible(true)}
+          style={{
+            padding: "10px 20px",
+            background: colors.accent.blue,
+            color: colors.text.white,
+            border: "none",
+            borderRadius: "10px",
+            cursor: "pointer",
+            fontFamily: fontFamily.base,
+            fontSize: "14px",
+            fontWeight: 700,
+          }}
+        >
+          Показать Cookie Banner
+        </button>
+        <CookieBanner
+          visible={cookieVisible}
+          onAccept={() => setCookieVisible(false)}
+        />
+
+        {/* ================================================================= */}
+        {/* MODAL */}
+        {/* ================================================================= */}
+        <SectionTitle id="modal">Модальное окно</SectionTitle>
+        <p style={{ fontSize: "14px", color: colors.text.placeholder, margin: "0 0 20px" }}>
+          modal--v1: bg white, radius 20px, padding 40px. Overlay + close button.
+          На /pricing-new/: содержит форму заказа.
+        </p>
+        <button
+          onClick={() => setModalOpen(true)}
+          style={{
+            padding: "10px 20px",
+            background: colors.accent.blue,
+            color: colors.text.white,
+            border: "none",
+            borderRadius: "10px",
+            cursor: "pointer",
+            fontFamily: fontFamily.base,
+            fontSize: "14px",
+            fontWeight: 700,
+          }}
+        >
+          Открыть Modal
+        </button>
+        <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+          <Typography level="h4" color={colors.text.main}>Заголовок модального окна</Typography>
+          <div style={{ marginTop: "20px", display: "flex", flexDirection: "column", gap: "16px" }}>
+            <FormInput placeholder="Имя" />
+            <FormInput placeholder="Email" />
+            <Textarea placeholder="Комментарий" height="100px" />
+            <Button variant="blueNew" size="m" full>Отправить заявку</Button>
+          </div>
+        </Modal>
+
+        {/* ================================================================= */}
+        {/* MARQUEE */}
+        {/* ================================================================= */}
+        <SectionTitle id="marquee">Бегущая строка</SectionTitle>
+        <p style={{ fontSize: "14px", color: colors.text.placeholder, margin: "0 0 20px" }}>
+          Бегущая строка логотипов клиентов. Container flex ~5254px, CSS animation infinite scroll.
+          35+ логотипов на сайте.
+        </p>
+        <ShowcaseBox>
+          <Marquee duration="20s">
+            {Array.from({ length: 8 }, (_, i) => (
+              <div
+                key={i}
+                style={{
+                  width: "120px",
+                  height: "40px",
+                  borderRadius: "8px",
+                  background: colors.bg.white,
+                  border: `1px solid ${colors.border.default}`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "12px",
+                  color: colors.text.placeholder,
+                  flexShrink: 0,
+                }}
+              >
+                Logo {i + 1}
+              </div>
+            ))}
+          </Marquee>
+        </ShowcaseBox>
+
+        {/* ================================================================= */}
+        {/* SOCIAL ICONS */}
+        {/* ================================================================= */}
+        <SectionTitle id="social">Иконки соцсетей</SectionTitle>
+        <p style={{ fontSize: "14px", color: colors.text.placeholder, margin: "0 0 20px" }}>
+          42x42px (mobile menu) / 32x32px (footer), border-radius 10px, bg #151515.
+          На сайте используются только Telegram и VK.
+        </p>
+        <ShowcaseRow label="42×42 — mobile menu">
+          <SocialIcon label="Telegram" href="#" bg="#151515" icon={<TelegramIcon size={20} />} />
+          <SocialIcon label="VK" href="#" bg="#151515" icon={<VkIcon size={20} />} />
+        </ShowcaseRow>
+        <ShowcaseRow label="32×32 — footer">
+          <SocialIcon label="Telegram" href="#" bg="#151515" icon={<TelegramIcon size={16} />} />
+          <SocialIcon label="VK" href="#" bg="#151515" icon={<VkIcon size={16} />} />
+        </ShowcaseRow>
+
+        {/* ================================================================= */}
         {/* NOTES */}
         {/* ================================================================= */}
-        <SectionTitle id="notes">Notes — зафиксированные различия</SectionTitle>
+        <SectionTitle id="notes">Примечания — зафиксированные различия</SectionTitle>
         <div
           style={{
             maxWidth: "720px",
@@ -612,31 +901,38 @@ export default function UIKitPage() {
           <ul style={{ margin: 0, paddingLeft: "20px" }}>
             <li style={{ marginBottom: "8px" }}>
               <strong>Два разных синих акцента:</strong> #001DFF (основные страницы) и #3072ED (только /pricing-new/).
-              Оба сохранены как отдельные токены.
+              Разные hover-направления: #001DFF светлеет → #4B60FF, #3072ED темнеет → #0A51D7.
             </li>
             <li style={{ marginBottom: "8px" }}>
               <strong>H1 на разных страницах различается:</strong> 76px (главная) vs 64px (pricing).
-              Оба уровня присутствуют в typography.
             </li>
             <li style={{ marginBottom: "8px" }}>
               <strong>H2 имеет 4 разных размера:</strong> 88px, 64px, 56px, 48px —
-              все сохранены как отдельные level (h2Sections, h2PricingBanner, h2PricingSection, h2PricingFaq).
+              все сохранены как отдельные level.
             </li>
             <li style={{ marginBottom: "8px" }}>
-              <strong>line-height у body:</strong> 25.2px (главная) vs 27px (pricing) —
-              оба варианта в typography (body, bodyPricing).
+              <strong>line-height у body:</strong> 25.2px (главная) vs 27px (pricing) vs 23.4px (faq answer).
             </li>
             <li style={{ marginBottom: "8px" }}>
-              <strong>Карточки имеют разные border-radius:</strong> 15px (blog), 20px (differents, pricing), 40px (hows) —
-              не унифицированы, каждый тип сохранён отдельно.
+              <strong>Карточки имеют разные border-radius:</strong> 15px (blog), 20px (differents, pricing), 40px (hows).
             </li>
             <li style={{ marginBottom: "8px" }}>
-              <strong>Section padding снизу:</strong> от 40px до 120px без единой шкалы —
-              все реальные значения зафиксированы в sectionPaddingBottom.
+              <strong>Section padding снизу:</strong> от 40px до 120px без единой шкалы.
+            </li>
+            <li style={{ marginBottom: "8px" }}>
+              <strong>Input font-size:</strong> 18px (/templates/) vs 16px (footer) — два варианта.
+              Input height: 54px (основные) vs ~40px (footer).
+            </li>
+            <li style={{ marginBottom: "8px" }}>
+              <strong>Checkbox:</strong> 4 варианта (default, simple, tiny, large) — large на /templates/ (24px/500).
+            </li>
+            <li style={{ marginBottom: "8px" }}>
+              <strong>Link hover механизмы различаются:</strong> header/dropdown — кастомный ::before pseudo-underline,
+              footer — text-decoration: underline + color change, content links — только color change.
             </li>
             <li>
-              <strong>hover btn--blue vs btn--blue-new:</strong> один становится светлее (#4B60FF),
-              второй темнее (#0A51D7) — разная логика для разных вариантов.
+              <strong>Toggle vs Pricing Nav:</strong> toggle — переключатель двух состояний (radius 32px),
+              pricing nav — навигация планов с border-bottom. Разные паттерны, не объединять.
             </li>
           </ul>
         </div>

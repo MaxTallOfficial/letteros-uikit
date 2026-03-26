@@ -22,7 +22,7 @@ interface ButtonProps {
  * Кнопка Letteros — все модификаторы as-is из аудита.
  *
  * Размер: ss / s / m
- * Вариант: white / blue / blueNew / black / transparentBlack / transparentWhite / transparentBlue / green
+ * Вариант: white / blue / blueNew / black / transparentBlack / transparentWhite / transparentBlue / transparentBlueNew / green
  * Состояния: disabled, off, full
  */
 export function Button({
@@ -69,6 +69,8 @@ export function Button({
             el.style.color = v.hoverColor!;
             if (variant === "transparentBlue") {
               el.style.boxShadow = "inset 0 0 0 1px rgb(75,96,255)";
+            } else if (variant === "transparentBlueNew") {
+              el.style.boxShadow = "inset 0 0 0 1px rgb(10,81,215)";
             }
           },
           onMouseLeave: (e: React.MouseEvent<HTMLElement>) => {

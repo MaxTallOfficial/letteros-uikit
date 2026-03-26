@@ -3,7 +3,7 @@
 import { InputHTMLAttributes, CSSProperties, useId } from "react";
 import { colors } from "@/tokens";
 
-type CheckboxVariant = "default" | "simple" | "tiny";
+type CheckboxVariant = "default" | "simple" | "tiny" | "large";
 
 interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "style"> {
   label: string;
@@ -17,6 +17,7 @@ interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "typ
  * default — color #A9A9A9, font-size 14px, padding-left 22px
  * simple — color #151515, padding-left 32px
  * tiny — font-size 10px, line-height 1.2
+ * large — font-size 24px, font-weight 500, padding-left 49px (/templates/ order form)
  *
  * ::before — 16x16px, border 1px solid #E1E1E1, radius 5px
  * :checked — border-color #151515, ::after opacity 1
@@ -52,6 +53,17 @@ export function Checkbox({ label, variant = "default", className = "", ...props 
       lineHeight: "1.2",
       cursor: "pointer",
       display: "inline-block",
+    },
+    large: {
+      position: "relative",
+      paddingLeft: "49px",
+      color: colors.text.main,
+      fontFamily: "var(--l-font-family)",
+      fontSize: "24px",
+      fontWeight: 500,
+      cursor: "pointer",
+      display: "inline-block",
+      lineHeight: "normal",
     },
   };
 

@@ -37,6 +37,9 @@ export const colors = {
     activeBg: "#F1F1F1", // rgb(241,241,241) — active period toggle
   },
   green: "#2D8962", // rgb(45,137,98) — теги на /templates/
+  overlay: "rgba(0, 0, 0, 0.2)", // mobile menu overlay
+  cookie: "#F2F2F2", // rgb(242,242,242) — cookie banner bg
+  cardCategoryDarker: "#0015BC", // rgb(0,21,188) — card__category:hover, card-s__title:hover
   gradient: {
     hows: "linear-gradient(90deg, #001DFF -30.81%, #8000FF 60.48%)",
   },
@@ -80,6 +83,8 @@ export const typography = {
   ui: { fontSize: "16px", fontWeight: 400, lineHeight: "normal", letterSpacing: "normal" },
   priceValue: { fontSize: "28px", fontWeight: 600, lineHeight: "39.2px", letterSpacing: "normal" },
   checkboxTiny: { fontSize: "10px", fontWeight: 400, lineHeight: "1.2", letterSpacing: "normal" },
+  /** Large checkbox — /templates/ order form */
+  checkboxLarge: { fontSize: "24px", fontWeight: 500, lineHeight: "normal", letterSpacing: "normal" },
   mobileMenu: { fontSize: "16px", fontWeight: 400, lineHeight: "22.4px", letterSpacing: "normal" },
 } as const;
 
@@ -128,6 +133,11 @@ export const radius = {
   howsCard: "40px",
   periodToggle: "32px",
   periodButton: "20px",
+  dropdown: "15px",
+  modal: "20px",
+  socialIcon: "10px",
+  featureIcon: "10px",
+  templatesHero: "15px",
   selectFilter: "12px",
   categoryIcon: "7px",
   checkbox: "5px",
@@ -142,8 +152,10 @@ export const shadows = {
   /** Многослойная мягкая тень — differents__cart, integrations__cart, faq__item:hover/open */
   cardSoft:
     "rgba(63,63,63,0.02) 0px 2.12px 5.3px, rgba(63,63,63,0.03) 0px 10px 20.7px, rgba(63,63,63,0.05) 0px 26px 65px",
-  /** Inset — только btn--tr-blue:hover */
+  /** Inset — btn--tr-blue:hover */
   btnInset: "inset 0 0 0 1px rgb(75,96,255)",
+  /** Inset — btn--tr-blue-new:hover */
+  btnInsetBlueNew: "inset 0 0 0 1px rgb(10,81,215)",
 } as const;
 
 // ---------------------------------------------------------------------------
@@ -248,6 +260,10 @@ export const buttonVariants = {
   transparentBlue: {
     bg: "transparent", color: "#001DFF", border: "1px solid #001DFF",
     hoverBg: "#4B60FF", hoverColor: "#ffffff",
+  },
+  transparentBlueNew: {
+    bg: "transparent", color: "#3072ED", border: "1px solid #3072ED",
+    hoverBg: "#0A51D7", hoverColor: "#ffffff",
   },
   green: {
     bg: "#2D8962", color: "#ffffff", border: "none",

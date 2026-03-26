@@ -31,6 +31,9 @@
 
   /* Colors: misc */
   --l-green: #2D8962;
+  --l-overlay: rgba(0, 0, 0, 0.2);
+  --l-cookie-bg: #F2F2F2;
+  --l-card-category-darker: #0015BC;
 
   /* Typography */
   --l-font-family: Raleway, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
@@ -73,6 +76,9 @@
   --color-l-surface-active-bg: var(--l-surface-active-bg);
 
   --color-l-green: var(--l-green);
+  --color-l-overlay: var(--l-overlay);
+  --color-l-cookie-bg: var(--l-cookie-bg);
+  --color-l-card-category-darker: var(--l-card-category-darker);
 
   --shadow-l-card-soft: var(--l-shadow-card-soft);
 
