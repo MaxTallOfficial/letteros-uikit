@@ -1,51 +1,53 @@
 # Letteros UI Kit
 
-UI kit для сайта [letteros.com](https://letteros.com), собранный as-is на основе аудита реальных DOM/CSS через Chrome DevTools MCP.
+Дизайн-система сайта [letteros.com](https://letteros.com), собранная as-is на основе аудита реального production-сайта.
 
-## Запуск
+## Быстрый старт
 
 ```bash
 npm install
 npm run dev
 ```
 
-Открыть [http://localhost:3000](http://localhost:3000) — entrypoint с переходом в UI kit.
-UI kit доступен на [http://localhost:3000/uikit](http://localhost:3000/uikit).
+UI kit: [http://localhost:3000/uikit](http://localhost:3000/uikit)
 
-## Структура
+## Структура проекта
 
 ```
 src/
-├── tokens/index.ts              # Дизайн-токены (source of truth)
-├── components/
-│   ├── ui/                      # UI-компоненты
-│   │   ├── Button.tsx
-│   │   ├── Typography.tsx
-│   │   ├── Card.tsx
-│   │   ├── Accordion.tsx
-│   │   ├── Tag.tsx
-│   │   ├── FormInput.tsx
-│   │   └── Checkbox.tsx
-│   └── layout/
-│       └── Container.tsx
+├── tokens/index.ts          # Дизайн-токены (source of truth)
+├── components/ui/           # UI-компоненты (21 файл)
+├── components/layout/       # Layout-компоненты (Container)
 ├── app/
-│   ├── globals.css              # CSS-переменные Letteros + Tailwind
-│   ├── page.tsx                 # Entrypoint
-│   └── uikit/page.tsx           # UI Kit страница
-docs/
-├── design-tokens.md
-├── components-inventory.md
-└── decisions.md
-audit.md                         # Полный аудит сайта
+│   ├── globals.css          # CSS-переменные --l-* + Tailwind
+│   ├── page.tsx             # Entrypoint
+│   └── uikit/page.tsx       # UI Kit страница
+docs/                        # Проектная документация
+audit.md                     # Полный аудит сайта
+CLAUDE.md                    # Инструкции для AI-агента
 ```
+
+## Документация
+
+| Файл | Назначение |
+|---|---|
+| `CLAUDE.md` | Главный инструктивный файл для Claude |
+| `docs/project-context.md` | Что это за проект и зачем |
+| `docs/design-tokens.md` | Все токены системы |
+| `docs/components-inventory.md` | Инвентарь компонентов |
+| `docs/composition-rules.md` | Правила композиции |
+| `docs/page-creation-workflow.md` | Workflow создания страниц |
+| `docs/decisions.md` | Зафиксированные решения |
+| `docs/open-questions.md` | Открытые вопросы |
+| `audit.md` | Полный аудит letteros.com |
 
 ## Стек
 
-Next.js 16 · React 19 · TypeScript · Tailwind CSS 4
+Next.js 16 / React 19 / TypeScript 5 / Tailwind CSS 4
 
 ## Принципы
 
 - Все значения из production-сайта letteros.com
 - Ничего не нормализовано и не улучшено
 - Если на сайте два разных значения — оба сохранены
-- Компоненты и токены — source of truth для новых страниц
+- UI kit — source of truth для новых страниц Letteros
