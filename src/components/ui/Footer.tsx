@@ -45,7 +45,7 @@ const containerStyle: CSSProperties = {
 const rowStyle: CSSProperties = {
   display: "flex",
   justifyContent: "space-between",
-  flexWrap: "nowrap",
+  flexWrap: "wrap",
   gap: "20px",
 };
 
@@ -130,9 +130,9 @@ const submitBtnStyle: CSSProperties = {
 };
 
 const recaptchaStyle: CSSProperties = {
-  fontSize: "10px",
+  fontSize: "12px",
   color: colors.text.placeholder,
-  lineHeight: "12px",
+  lineHeight: "14.4px",
   marginTop: "12px",
 };
 
@@ -186,12 +186,28 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
 export function Footer() {
   return (
     <footer style={footerStyle}>
+      <style>{`
+        @media (max-width: 767px) {
+          .footer-row {
+            flex-wrap: wrap !important;
+          }
+          .footer-nav-col {
+            flex-basis: calc(50% - 10px);
+            flex-shrink: 0 !important;
+            flex-grow: 0 !important;
+          }
+          .footer-subscribe {
+            width: 100% !important;
+            flex-basis: 100%;
+          }
+        }
+      `}</style>
       {/* Main */}
       <div style={mainStyle}>
         <div style={containerStyle}>
-          <div style={rowStyle}>
+          <div style={rowStyle} className="footer-row">
             {/* Col 1 — Продукт */}
-            <div style={navColStyle}>
+            <div style={navColStyle} className="footer-nav-col">
               <div style={titleStyle}>Продукт</div>
               <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
                 <NavLink href="https://app.letteros.com/">Конструктор</NavLink>
@@ -206,7 +222,7 @@ export function Footer() {
             </div>
 
             {/* Col 2 — Бесплатные сервисы */}
-            <div style={navColStyle}>
+            <div style={navColStyle} className="footer-nav-col">
               <div style={titleStyle}>Бесплатные сервисы</div>
               <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
                 <NavLink href="/shorturl/">Сокращение ссылок</NavLink>
@@ -219,7 +235,7 @@ export function Footer() {
             </div>
 
             {/* Col 3 — Компания */}
-            <div style={navColStyle}>
+            <div style={navColStyle} className="footer-nav-col">
               <div style={titleStyle}>Компания</div>
               <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
                 <NavLink href="/projects/">Кейсы</NavLink>
@@ -230,7 +246,7 @@ export function Footer() {
             </div>
 
             {/* Col 4 — Документы */}
-            <div style={navColStyle}>
+            <div style={navColStyle} className="footer-nav-col">
               <div style={titleStyle}>Документы</div>
               <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
                 <NavLink href="/privacy-policy-old/">Политика обработки данных</NavLink>
@@ -239,7 +255,7 @@ export function Footer() {
             </div>
 
             {/* Col 5 — Контакты */}
-            <div style={navColStyle}>
+            <div style={navColStyle} className="footer-nav-col">
               <div style={titleStyle}>Контакты</div>
               <div style={{ display: "flex", gap: "8px" }}>
                 <a href="https://t.me/letteros" target="_blank" rel="noopener" style={socItemStyle} title="Telegram">
@@ -252,7 +268,7 @@ export function Footer() {
             </div>
 
             {/* Subscribe */}
-            <div style={subscribeContainerStyle}>
+            <div style={subscribeContainerStyle} className="footer-subscribe">
               <div style={titleStyle}>Только польза</div>
               <p style={{ fontSize: "14px", color: colors.text.main, lineHeight: "16.8px", marginBottom: "20px", marginTop: 0 }}>
                 Дайджесты о новых фичах продукта и доступ к нашему курсу по верстке писем.

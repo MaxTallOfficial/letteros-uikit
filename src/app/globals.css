@@ -90,3 +90,15 @@ body {
   color: var(--l-text-main);
   font-family: var(--l-font-family);
 }
+
+/* =========================================================================
+   Mobile typography overrides (≤767px)
+   !important необходим для перебития inline style из TypeScript-токенов
+   ========================================================================= */
+
+@media (max-width: 767px) {
+  .l-h1 { font-size: 56px !important; line-height: 1.1 !important; }
+  .l-h2 { font-size: 40px !important; line-height: 1.1 !important; }
+  .l-h3 { font-size: 32px !important; line-height: 1.15 !important; }
+  .l-h4 { font-size: 24px !important; line-height: 1.2 !important; }
+}

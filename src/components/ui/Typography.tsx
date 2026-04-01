@@ -37,6 +37,15 @@ export function Typography({
 
   const Tag = as ?? defaultTag();
 
+  const mobileClass = (): string => {
+    if (level.startsWith("h1")) return "l-h1";
+    if (level.startsWith("h2")) return "l-h2";
+    if (level.startsWith("h3")) return "l-h3";
+    if (level.startsWith("h4")) return "l-h4";
+    return "";
+  };
+  const combinedClass = [mobileClass(), className].filter(Boolean).join(" ");
+
   const mergedStyle: CSSProperties = {
     fontFamily: fontFamily.base,
     fontSize: t.fontSize,
@@ -49,7 +58,7 @@ export function Typography({
   };
 
   return (
-    <Tag className={className} style={mergedStyle}>
+    <Tag className={combinedClass} style={mergedStyle}>
       {children}
     </Tag>
   );
