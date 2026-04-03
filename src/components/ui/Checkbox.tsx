@@ -14,19 +14,19 @@ interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "typ
  * Checkbox Letteros — as-is:
  * Нативный input скрыт (opacity 0). Стилизован через label::before / ::after.
  *
- * default — color #A9A9A9, font-size 14px, padding-left 22px
- * simple — color #151515, padding-left 32px
- * tiny — font-size 10px, line-height 1.2
- * large — font-size 24px, font-weight 500, padding-left 49px (/templates/ order form)
+ * default — color #A9A9A9, font-size 14px, padding-left 24px
+ * simple — color #151515, padding-left 24px
+ * tiny — font-size 12px, line-height 1.4, padding-left 22px (без изменений)
+ * large — font-size 24px, font-weight 500, padding-left 36px, checkbox 24x24px
  *
- * ::before — 16x16px, border 1px solid #E1E1E1, radius 5px
- * :checked — border-color #151515, ::after opacity 1
+ * ::before — 16x16px (large: 24x24px), border 1px solid #E1E1E1, radius 5px
+ * :checked — border-color #151515, ::after opacity 1, label color → #151515
  */
 export function Checkbox({ label, variant = "default", className = "", ...props }: CheckboxProps) {
   const labelStyles: Record<CheckboxVariant, CSSProperties> = {
     default: {
       position: "relative",
-      paddingLeft: "22px",
+      paddingLeft: "24px",
       color: colors.text.placeholder,
       fontFamily: "var(--l-font-family)",
       fontSize: "14px",
@@ -36,7 +36,7 @@ export function Checkbox({ label, variant = "default", className = "", ...props 
     },
     simple: {
       position: "relative",
-      paddingLeft: "32px",
+      paddingLeft: "24px",
       color: colors.text.main,
       fontFamily: "var(--l-font-family)",
       fontSize: "14px",
@@ -56,7 +56,7 @@ export function Checkbox({ label, variant = "default", className = "", ...props 
     },
     large: {
       position: "relative",
-      paddingLeft: "49px",
+      paddingLeft: "36px",
       color: colors.text.main,
       fontFamily: "var(--l-font-family)",
       fontSize: "24px",
@@ -106,6 +106,20 @@ export function Checkbox({ label, variant = "default", className = "", ...props 
         .letteros-checkbox-input:checked + .letteros-checkbox-label::after {
           opacity: 1;
         }
+        .letteros-checkbox-input:checked + .letteros-checkbox-label {
+          color: ${colors.text.main} !important;
+        }
+        .letteros-checkbox-label-large::before {
+          width: 24px !important;
+          height: 24px !important;
+          border-radius: 6px !important;
+        }
+        .letteros-checkbox-label-large::after {
+          top: 8px !important;
+          left: 6px !important;
+          width: 14px !important;
+          height: 8px !important;
+        }
       `}</style>
       <input
         type="checkbox"
@@ -115,7 +129,7 @@ export function Checkbox({ label, variant = "default", className = "", ...props 
       />
       <label
         htmlFor={id}
-        className="letteros-checkbox-label"
+        className={`letteros-checkbox-label${variant === "large" ? " letteros-checkbox-label-large" : ""}`}
         style={labelStyles[variant]}
       >
         {label}

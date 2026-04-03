@@ -19,7 +19,7 @@ export function Radio({ label, className = "", ...props }: RadioProps) {
   const wrapperStyle: CSSProperties = {
     display: "flex",
     alignItems: "center",
-    gap: "10px",
+    gap: "8px",
     fontFamily: "var(--l-font-family)",
     fontSize: "14px",
     color: colors.text.main,
@@ -67,7 +67,7 @@ export function Radio({ label, className = "", ...props }: RadioProps) {
         className="letteros-radio-input"
         {...props}
       />
-      <label htmlFor={id} className="letteros-radio-label" style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }}>
+      <label htmlFor={id} className="letteros-radio-label" style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" }}>
         <span className="letteros-radio-indicator" />
         {label}
       </label>
