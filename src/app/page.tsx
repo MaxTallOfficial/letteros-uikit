@@ -26,7 +26,7 @@ export default function Home() {
           height: "54px",
           padding: "0 32px",
           borderRadius: "15px",
-          background: "#001DFF",
+          background: "#3072ED",
           color: "#ffffff",
           fontWeight: 700,
           fontSize: "18px",

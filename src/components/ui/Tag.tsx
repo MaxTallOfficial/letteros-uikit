@@ -13,7 +13,7 @@ interface TagProps {
  * Тег / Badge Letteros — два варианта из аудита:
  *
  * green — btn--tag btn--green: bg #2D8962, текст белый (страница /templates/)
- * blue — категория блога: цвет #001DFF, без фона
+ * blue — категория блога: цвет #3072ED, без фона
  */
 export function Tag({ children, variant = "green", className = "" }: TagProps) {
   const style: CSSProperties =

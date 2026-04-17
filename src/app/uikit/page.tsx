@@ -291,7 +291,7 @@ export default function UIKitPage() {
           <Swatch color={colors.bg.alt} label="bg-alt" note="footer, blog, серые секции, dropdown" />
         </div>
 
-        <SubTitle>Акцент — #001DFF (основная система)</SubTitle>
+        <SubTitle>Акцент — #3072ED (основная система)</SubTitle>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "12px" }}>
           <Swatch color={colors.accent.blue} label="accent-blue" note="CTA-кнопки, ссылки, категории, radio, декор" />
           <Swatch color={colors.accent.blueHover} label="accent-blue-hover" note="hover для btn--blue (светлее)" />
@@ -459,7 +459,7 @@ export default function UIKitPage() {
         ))}
 
         <SubTitle>Все варианты (size=&quot;m&quot;)</SubTitle>
-        <ShowcaseRow label="Светлый фон — основная система (#001DFF)">
+        <ShowcaseRow label="Светлый фон — основная система (#3072ED)">
           <Button variant="blue">btn--blue</Button>
           <Button variant="black">btn--black</Button>
           <Button variant="transparentBlack">btn--tr-b</Button>
@@ -507,7 +507,7 @@ export default function UIKitPage() {
           <div style={{ flex: 1 }}>
             <Typography level="h4" color={colors.text.white}>Как это работает</Typography>
             <Typography level="body" color={colors.text.white} style={{ marginTop: "12px", opacity: 0.9 }}>
-              Gradient card — radius 40px, от #001DFF до #8000FF. Текст белый.
+              Gradient card — radius 40px, от #3072ED до #8000FF. Текст белый.
             </Typography>
           </div>
         </Card>
@@ -654,7 +654,7 @@ export default function UIKitPage() {
           <Radio label="Вариант B" name="demo-radio" />
           <Radio label="Вариант C" name="demo-radio" />
           <p style={{ fontSize: "12px", color: colors.text.placeholder, marginTop: "4px" }}>
-            :checked — border-color #001DFF, точка внутри.
+            :checked — border-color #3072ED, точка внутри.
           </p>
         </div>
 
@@ -900,8 +900,8 @@ export default function UIKitPage() {
           </p>
           <ul style={{ margin: 0, paddingLeft: "20px" }}>
             <li style={{ marginBottom: "8px" }}>
-              <strong>Два разных синих акцента:</strong> #001DFF (основные страницы) и #3072ED (только /pricing-new/).
-              Разные hover-направления: #001DFF светлеет → #4B60FF, #3072ED темнеет → #0A51D7.
+              <strong>Два разных синих акцента:</strong> #3072ED (основные страницы) и #3072ED (только /pricing-new/).
+              Разные hover-направления: #3072ED светлеет → #0A51D7, #3072ED темнеет → #0A51D7.
             </li>
             <li style={{ marginBottom: "8px" }}>
               <strong>H1 на разных страницах различается:</strong> 76px (главная) vs 64px (pricing).

@@ -22,8 +22,8 @@ export const colors = {
     alt: "#F8F8F8", // rgb(248,248,248) — footer, blog, серые секции
   },
   accent: {
-    blue: "#001DFF", // rgb(0,29,255) — primary CTA, ссылки
-    blueHover: "#4B60FF", // rgb(75,96,255) — hover для btn--blue
+    blue: "#3072ED", // rgb(0,29,255) — primary CTA, ссылки
+    blueHover: "#0A51D7", // rgb(75,96,255) — hover для btn--blue
     /** Второй синий — используется ТОЛЬКО на /pricing-new/ */
     blueNew: "#3072ED", // rgb(48,114,237)
     blueNewHover: "#0A51D7", // rgb(10,81,215) — hover для btn--blue-new (темнее, не светлее)
@@ -41,7 +41,7 @@ export const colors = {
   cookie: "#F2F2F2", // rgb(242,242,242) — cookie banner bg
   cardCategoryDarker: "#0015BC", // rgb(0,21,188) — card__category:hover, card-s__title:hover
   gradient: {
-    hows: "linear-gradient(90deg, #001DFF -30.81%, #8000FF 60.48%)",
+    hows: "linear-gradient(90deg, #3072ED -30.81%, #8000FF 60.48%)",
   },
 } as const;
 
@@ -238,8 +238,8 @@ export const buttonVariants = {
     hoverBg: "#151515", hoverColor: "#ffffff",
   },
   blue: {
-    bg: "#001DFF", color: "#ffffff", border: "none",
-    hoverBg: "#4B60FF", hoverColor: "#ffffff",
+    bg: "#3072ED", color: "#ffffff", border: "none",
+    hoverBg: "#0A51D7", hoverColor: "#ffffff",
   },
   blueNew: {
     bg: "#3072ED", color: "#ffffff", border: "none",
@@ -258,8 +258,8 @@ export const buttonVariants = {
     hoverBg: "#ffffff", hoverColor: "#151515",
   },
   transparentBlue: {
-    bg: "transparent", color: "#001DFF", border: "1px solid #001DFF",
-    hoverBg: "#4B60FF", hoverColor: "#ffffff",
+    bg: "transparent", color: "#3072ED", border: "1px solid #3072ED",
+    hoverBg: "#0A51D7", hoverColor: "#ffffff",
   },
   transparentBlueNew: {
     bg: "transparent", color: "#3072ED", border: "1px solid #3072ED",

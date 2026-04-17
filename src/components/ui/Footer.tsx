@@ -14,7 +14,7 @@ import { LogoMarkGrey, LogoWordmarkGrey, TelegramIcon, VkIcon } from "./icons";
  *   5 nav-колонок + divider + subscribe block
  *
  * Nav title: 14px/700/#151515, letter-spacing 0.1px, mb 16px
- * Nav links: 14px/400/#151515, li mb 8px, hover → #001DFF + underline
+ * Nav links: 14px/400/#151515, li mb 8px, hover → #3072ED + underline
  * Social: 32x32px, radius 10px, bg #151515
  *
  * Subscribe: 260px, input 54px + btn--black btn--s-m 54px (width 100%)
